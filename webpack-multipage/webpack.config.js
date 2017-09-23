@@ -63,7 +63,11 @@ module.exports = {
       verbose: true,
       dry: false
 		}),
-		new ExtractTextPlugin('main.css')
+		new ExtractTextPlugin('main.css'),
+		new webpack.ProvidePlugin({
+			$:'jquery',
+			jQuery:'jquery'
+		})
 		
 	]
 	// devtool:"source-map"
