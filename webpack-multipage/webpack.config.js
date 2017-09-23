@@ -16,17 +16,17 @@ module.exports = {
 	module:{
 		rules:[
 			{
-				test:'/\.css$/',
-				use:[
-					'style-loader',
-					{loader:'css-loader',options:{modules:true,importLoaders:1}}
-				],
+				test:/\.css$/,
+				// use:[
+				// 	'style-loader',
+				// 	'css-loader'
+				// ],
 				include:path.resolve(__dirname,'src/css'),
-				exclude:/node_modules/
-				// use: ExtractTextPlugin.extract({
-				// 	fallback: "style-loader",
-				// 	use: "css-loader"
-				// })
+				exclude:/node_modules/,
+				use: ExtractTextPlugin.extract({
+					fallback: "style-loader",
+					use: "css-loader"
+				})
 			}
 		]
 	},
@@ -48,7 +48,7 @@ module.exports = {
       verbose: true,
       dry: false
 		}),
-		new ExtractTextPlugin('index.css')
+		new ExtractTextPlugin('main.css')
 	]
 	// devtool:"source-map"
 }
