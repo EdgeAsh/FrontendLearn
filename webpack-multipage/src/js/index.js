@@ -1,4 +1,8 @@
 import './../css/index.css';
-require(['./common.js'],function(common){
+import $ from 'jquery'
+require(['./common.js'],(common)=>{
 	common.initIndex();
+	$(function(){
+		console.log(`this is jquery`);
+	})
 });

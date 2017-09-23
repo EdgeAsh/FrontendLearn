@@ -27,6 +27,14 @@ module.exports = {
 					fallback: "style-loader",
 					use: "css-loader"
 				})
+			},
+			{
+				test:/\.js$/,
+				include:path.resolve(__dirname,'src/js'),
+				exclude:/node_modules/,
+				use:[
+					"babel-loader"
+				]
 			}
 		]
 	},
