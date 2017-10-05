@@ -1,0 +1,176 @@
+extends layout.jade
+block content
+	block desc
+		p desc from index
+	#runtime 
+	script(src='node_modules/jade/runtime.js')
+	script(src='runtime.js')
+	script.
+		var runtimeNode = document.getElementById('runtime');
+		var runtimeHtml = template({isRuntime:true});
+		runtimeNode.innerHTML = runtimeHtml;
+	h3 markdown
+	:markdown
+		Hi, this is **imooc** [link](https://imooc.com)
+		
+	h2 模板继承	
+	h3 包含
+	include style.jade
+		style.
+			h2 {
+				color:green
+			}
+	include title.html
+	h2 mixin
+	mixin lesson
+		p imooc jade study
+	+lesson
+	mixin study(name, courses)
+		p= name
+		ul.courses
+			each course in courses
+				li= course
+	+study('tom',['jade','koa'])
+
+	// mixin嵌套
+	mixin group(student)
+		h4= student.name
+		+study(student.name,student.courses)
+	+group({name:'tom',courses:['jade','koa']})
+
+	// mixin 代码块block
+	mixin team(slogon)
+		h4 #{slogon}
+		if block
+			block
+		else 
+			p no team
+
+	+team('hello edge')
+		p this is block	
+	// mixin传递属性 
+	mixin attr(name)
+		p(class!=attributes.class) #{name}
+	+attr('attr')(class='magic')
+	// mixin传递属性2
+	mixin attrs(name)
+		p&attributes(attributes) #{name}
+	+attrs('atts')(class='magic2',id='attrid')
+	// mixin传递了参数，但不知道个数
+	mixin magic(name, ...items)
+		ul(class='#{name}')
+			each item in items
+				li= item
+	+magic('magic','node','koa','jade')
+	h2 流程
+	// if else
+	- var isImooc = true
+	- var lessons = ['jade','node','koa']
+	if lessons
+		if lessons.length > 2
+			p= lessons.join(',')
+		else if lessons.length > 1
+			p= lessons.join('-')
+		else 
+			p no lesson
+	else
+		p no lesson
+
+	// unless
+	unless !isImooc
+		p= lessons.length
+
+	// switch case
+	- var name = 'java'
+	case name
+		when 'java'
+		when 'node'
+			p Hi #{name}
+		when 'jade': p Hi #{name}
+		when 'express': p Hi #{name}
+		default
+			p Hi #{name}
+
+	// while
+	- var n = 0
+	ul 
+		while n < 4
+			li= n++
+	h3 for each
+	- var imooc = {course: 'jade', level:'high'}
+	- for (var k in imooc)
+		p= imooc[k]
+	//遍历对象，each1
+	- each value, key in imooc
+		p #{key}: #{value}
+	//遍历对象，each2
+	each value, key in imooc
+		p #{key}: #{value}
+	// 遍历数组
+	- var courses = ['node','jda','express']
+	each item in courses
+		p= item
+	// 嵌套循环
+	- var sections = [{id:1,items:['a','b']},{id:2,items:['c','d']}]
+	dl
+		each section in sections
+			dt= section.id
+			each item in section.items
+				dd= item
+	// 分割
+	h2 转义
+	- var data = 'text'
+	- var htmlData = '<script>alert(1);</script><span>script</span>'
+	p #{data}
+	p #{htmlData}
+	p= data
+	p= htmlData
+	h3 非转义
+	p !{htmlData}
+	p!= data
+	p!= htmlData
+	p \!{htmlData}
+	p \#{htmlData}
+
+	// 分割 
+	input(value=newData)
+	input(value='#{newData}')
+	// 分割
+	h1.title#title.tie jade-learn
+	h2 div标签可以省略
+	.hel#id
+		a(href='www.baidu.com',title='baidu',data-uid='100') link
+	input(name='course', type='text', value='jade')
+	input(name='type',type='checkbox',checked)
+
+	h2 多行输出，大段文本
+	p. 
+		这是第一种方式，有点
+		1. aa <span>hello</span>
+		2. bb
+		3. cc
+		<strong>hello</strong>
+		4. dd
+
+	p
+		| 这是第二种方式,没有点
+		| 1. aa <span>hello</span>
+		| 2. bb
+		<span>ino</span>
+		span hello
+		| 3. cc
+		| <strong>hello</strong>
+		| 4. dd
+
+
+	h2 单行注释
+	// 这是注释，看结果
+
+	h2 非缓冲注释
+	//- 不会被编译成html
+	h2 快注释
+	//
+		p 这是快注释
+		你能将阿里京东风口浪尖阿斯利康的
+
+		就立刻解决埃里克森的解放路口

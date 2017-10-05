@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- 包含-->
+    <title>JADE,PUG-learn</title>
+    <meta charset="utf-8">
+    <style>body {color: #f60}</style>
+    <script>var abs = 'hello abs'</script>
+  </head>
+  <body>
+    <p>desc from index</p>
+    <p>desc from index</p>
+    <div id="runtime"> </div>
+    <script src="node_modules/jade/runtime.js"></script>
+    <script src="runtime.js"></script>
+    <script>
+      var runtimeNode = document.getElementById('runtime');
+      var runtimeHtml = template({isRuntime:true});
+      runtimeNode.innerHTML = runtimeHtml;
+    </script>
+    <h3>markdown</h3><p>Hi, this is <strong>imooc</strong> <a href="https://imooc.com">link</a></p>
+    <h2>模板继承	</h2>
+    <h3>包含</h3>
+    <style>
+      h3{
+      	color: #555
+      }
+    </style>
+    <style>
+      h2 {
+      	color:green
+      }
+    </style><div>
+	<h3>content from html</h3>
+</div>
+    <h2>mixin</h2>
+        <p>imooc jade study</p>
+        <p>tom</p>
+        <ul class="courses">
+          <li>jade</li>
+          <li>koa</li>
+        </ul>
+    <!-- mixin嵌套-->
+        <h4>tom</h4>
+            <p>tom</p>
+            <ul class="courses">
+              <li>jade</li>
+              <li>koa</li>
+            </ul>
+    <!-- mixin 代码块block-->
+        <h4>hello edge</h4>
+        <p>this is block	</p>
+    <!-- mixin传递属性 -->
+        <p class="magic">attr</p>
+    <!-- mixin传递属性2-->
+        <p id="attrid" class="magic2">atts</p>
+    <!-- mixin传递了参数，但不知道个数-->
+        <ul class="magic">
+          <li>node</li>
+          <li>koa</li>
+          <li>jade</li>
+        </ul>
+    <h2>流程</h2>
+    <!-- if else-->
+    <p>jade,node,koa</p>
+    <!-- unless-->
+    <p>3</p>
+    <!-- switch case-->
+    <p>Hi java</p>
+    <!-- while-->
+    <ul> 
+      <li>0</li>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul>
+    <h3>for each</h3>
+    <p>jade</p>
+    <p>high</p>
+    <!--遍历对象，each1-->
+    <p>course: jade</p>
+    <p>level: high</p>
+    <!--遍历对象，each2-->
+    <p>course: jade</p>
+    <p>level: high</p>
+    <!-- 遍历数组-->
+    <p>node</p>
+    <p>jda</p>
+    <p>express</p>
+    <!-- 嵌套循环-->
+    <dl>
+      <dt>1</dt>
+      <dd>a</dd>
+      <dd>b</dd>
+      <dt>2</dt>
+      <dd>c</dd>
+      <dd>d</dd>
+    </dl>
+    <!-- 分割-->
+    <h2>转义</h2>
+    <p>text</p>
+    <p>&lt;script&gt;alert(1);&lt;/script&gt;&lt;span&gt;script&lt;/span&gt;</p>
+    <p>text</p>
+    <p>&lt;script&gt;alert(1);&lt;/script&gt;&lt;span&gt;script&lt;/span&gt;</p>
+    <h3>非转义</h3>
+    <p><script>alert(1);</script><span>script</span></p>
+    <p>text</p>
+    <p><script>alert(1);</script><span>script</span></p>
+    <p>!{htmlData}</p>
+    <p>#{htmlData}</p>
+    <!-- 分割 -->
+    <input>
+    <input value="undefined">
+    <!-- 分割-->
+    <h1 id="title" class="title tie">jade-learn</h1>
+    <h2>div标签可以省略</h2>
+    <div id="id" class="hel"><a href="www.baidu.com" title="baidu" data-uid="100">link</a></div>
+    <input name="course" type="text" value="jade">
+    <input name="type" type="checkbox" checked>
+    <h2>多行输出，大段文本</h2>
+    <p>
+      这是第一种方式，有点
+      1. aa <span>hello</span>
+      2. bb
+      3. cc
+      <strong>hello</strong>
+      4. dd
+      
+    </p>
+    <p>
+      这是第二种方式,没有点
+      1. aa <span>hello</span>
+      2. bb
+      <span>ino</span><span>hello</span>3. cc
+      <strong>hello</strong>
+      4. dd
+    </p>
+    <h2>单行注释</h2>
+    <!-- 这是注释，看结果-->
+    <h2>非缓冲注释</h2>
+    <h2>快注释</h2>
+    <!--
+    p 这是快注释
+    你能将阿里京东风口浪尖阿斯利康的
+    
+    就立刻解决埃里克森的解放路口
+    -->
+  </body>
+</html>
